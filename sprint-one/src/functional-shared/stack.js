@@ -1,5 +1,7 @@
 var Stack = function() {
   var newStack = {};
+  newStack.length = 0;
+
 
   _.extend(newStack, stackMethods);
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
@@ -7,9 +9,7 @@ var Stack = function() {
   return newStack;
 };
 
-var stackMethods = {
-  length: 0
-};
+var stackMethods = {};
 
 stackMethods.push = function(val) {
   this[this.length] = val;
