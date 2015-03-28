@@ -1,10 +1,14 @@
 var Graph = function(){
+  //good practice
+  // this = Object.create(Graph.prototype);
 
   this.storage = {};
+  //return this;
 };
 
 Graph.prototype.addNode = function(node){
-  this.storage[node] = new GraphNode();
+  this.storage[node] = {value: node, edges: []};
+  // this.storage[node] = new GraphNode(node);
 };
 
 Graph.prototype.contains = function(node){
@@ -55,12 +59,13 @@ Graph.prototype.forEachNode = function(cb){
 };
 
 
-var GraphNode = function() {
-  // var obj = Object.create(this)
-  this.edges = [];
+// var GraphNode = function(value) {
+//   // var obj = Object.create(this)
+//   this.value = value;
+//   this.edges = [];
 
-  //return obj
-};
+//   //return obj
+// };
 
 
 /*
