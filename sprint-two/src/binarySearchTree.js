@@ -6,7 +6,7 @@ var BinarySearchTree = function(value){
 
 BinarySearchTree.prototype.insert = function (value) {
   if (Object.keys(this.storage).length === 0) {
-    this.storage[value] = BinaryTreeNode(value);
+    this.storage[value] = new BinaryTreeNode(value);
     this.head = this.storage[value];
   } else
   {
@@ -32,3 +32,8 @@ var BinaryTreeNode = function (value) {
   this.left = undefined;
   this.right = undefined;
 };
+
+/*
+**********IMPORTANT!!!!!!
+Pseudoclassical style will not work due to tests not using new
+*/
