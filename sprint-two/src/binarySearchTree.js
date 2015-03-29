@@ -1,16 +1,11 @@
 var BinarySearchTree = function(value){
-  //var this = Object.create(BinarySearchTree.prototype);
-  this.storage = {};
-  this.storage.value = new BinaryTreeNode(value);
-  this.storage.head = this.storage.value;
-  //this.value = value;
-  //return this;
-  debugger; //can't use this.storage; must refer to BST object
+  this.value = value;
+  this.left = undefined;
+  this.right = undefined;
 };
 
-
-
 BinarySearchTree.prototype.insert = function (value) {
+
   var checkNodes = function(node) {
     var direction = undefined;
     if(value < node.value && value !== node.value) {
@@ -20,37 +15,51 @@ BinarySearchTree.prototype.insert = function (value) {
     }
 
     if(node[direction] === undefined) {
-     node[direction] = new BinaryTreeNode(value);
-     node[direction];
+     node[direction] = new BinarySearchTree(value);
     } else {
       checkNodes(node[direction]);
     }
-    debugger;
+  };
+  checkNodes(this);
+};
+
+BinarySearchTree.prototype.contains = function (value) {
+// create variable to store contain
+  var contain = false;
+// recursive function that checks whether current node.value = value;
+  var exploreNode = function(node) {
+
+    if(node.value === value) {
+      // if yes, update contain to true;
+      contain = true;
+    }
+    // if no, run recursive function on .left and .right
+    else {
+      if(node.left !== undefined) {
+        exploreNode(node.left);
+      }
+      if(node.right !== undefined) {
+        exploreNode(node.right);
+      }
+    }
+  };
+  exploreNode(this);
+  return contain;
+};
+BinarySearchTree.prototype.depthFirstLog = function (fn) {
+
+  var callbackNode = function(node) {
+    fn(node.value);
+
+    if(node.left !== undefined) {
+      callbackNode(node.left);
+    }
+    if(node.right !== undefined) {
+      callbackNode(node.right);
+    }
 
   };
-
-  // if (Object.keys(this.storage).length === 0) {
-  //   this.storage[value] = new BinaryTreeNode(value);
-  //   this.head = (this.storage)[value];
-  // }
-
-  checkNodes(this.storage.head);
-    //storage[value] = new BinaryTreeNode(value);
-
-};
-
-BinarySearchTree.prototype.contains = function () {
-
-};
-
-BinarySearchTree.prototype.depthFirstLog = function () {
-
-};
-
-var BinaryTreeNode = function (value) {
-  this.value = value;
-  this.left = undefined;
-  this.right = undefined;
+  callbackNode(this);
 };
 
 
